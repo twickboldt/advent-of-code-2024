@@ -88,27 +88,27 @@ public class Day4 : Day
 
         return '_';
     }
-}
 
-public record Position(int X, int Y)
-{
-    public bool IsAdjacent(Position other)
+    public record Position(int X, int Y)
     {
-        return Math.Abs(X - other.X) <= 1 && Math.Abs(Y - other.Y) <= 1;
-    }
+        public bool IsAdjacent(Position other)
+        {
+            return Math.Abs(X - other.X) <= 1 && Math.Abs(Y - other.Y) <= 1;
+        }
 
-    public bool IsDiagonallyAdjacent(Position other)
-    {
-        return Math.Abs(X - other.X) == 1 && Math.Abs(Y - other.Y) == 1;
-    }
+        public bool IsDiagonallyAdjacent(Position other)
+        {
+            return Math.Abs(X - other.X) == 1 && Math.Abs(Y - other.Y) == 1;
+        }
 
-    public Position Diff(Position other)
-    {
-        return new Position(X - other.X, Y - other.Y);
-    }
+        public Position Diff(Position other)
+        {
+            return new Position(X - other.X, Y - other.Y);
+        }
 
-    public Position Add(Position other)
-    {
-        return new Position(X + other.X, Y + other.Y);
+        public Position Add(Position other)
+        {
+            return new Position(X + other.X, Y + other.Y);
+        }
     }
 }
