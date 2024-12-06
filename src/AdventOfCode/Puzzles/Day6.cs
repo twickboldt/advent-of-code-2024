@@ -56,8 +56,8 @@ public class Day6 : Day
 
         Parallel.ForEach(newObstaclePositions, newObstacle =>
         {
-            var temperedObstacles = new List<Position>(obstaclePositions) { newObstacle };
-            if (CausesLoop(temperedObstacles, guardPosition, input))
+            // var temperedObstacles = new List<Position>(obstaclePositions) { newObstacle };
+            if (CausesLoop(obstaclePositions, newObstacle, guardPosition, input))
             {
                 counter++;
             }
@@ -89,18 +89,15 @@ public class Day6 : Day
         return (obstaclePositions, guardPosition);
     }
 
-    private static bool CausesLoop(List<Position> obstaclePositions, Position guardPosition, string[] input)
+    private static bool CausesLoop(List<Position> obstaclePositions, Position placedObstacle, Position guardPosition, string[] input)
     {
         var guardDirection = Direction.Up;
         var guardPositionsWhenMovedUp = new List<Position>([guardPosition]);
-        // var runLoopDetection = false;
-        // var stepCounter = 0;
-        // var maxSteps = input.Length * input[0].Length;
         while (true)
         {
             var newPosition = Move(guardPosition, guardDirection);
 
-            while (obstaclePositions.Contains(newPosition))
+            while (obstaclePositions.Contains(newPosition) || newPosition == placedObstacle)
             {
                 guardDirection = TurnRight(guardDirection);
                 newPosition = Move(guardPosition, guardDirection);
@@ -123,27 +120,6 @@ public class Day6 : Day
             {
                 break;
             }
-
-            // positionsSinceLastLoopDetection.Add(guardPosition);
-
-            // if (runLoopDetection)
-            // {
-            //     // var loopDetected = positionsSinceLastLoopDetection.Count > 0 &&
-            //     //                    positionsSinceLastLoopDetection.SequenceEqual(positionsSinceLastLoopDetection2);
-            //     var loopDetected = stepCounter > maxSteps;
-            //
-            //     if (loopDetected)
-            //     {
-            //         return true;
-            //     }
-            //     
-            //     positionsSinceLastLoopDetection2 = [..positionsSinceLastLoopDetection];
-            //     positionsSinceLastLoopDetection.Clear();
-            //     
-            //     runLoopDetection = false;
-            // }
-
-            // stepCounter++;
         }
 
         return false;
