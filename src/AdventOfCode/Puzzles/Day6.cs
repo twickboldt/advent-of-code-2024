@@ -39,6 +39,7 @@ public class Day6 : Day
         var (obstaclePositions, guardPosition) = GetStartingPositions(input);
 
         var counter = 0;
+        var newObstaclePositions = new List<Position>();
         for (var y = 0; y < input.Length; y++)
         {
             for (var x = 0; x < input[y].Length; x++)
@@ -48,15 +49,18 @@ public class Day6 : Day
                 {
                     continue;
                 }
-                var temperedObstacles = new List<Position>(obstaclePositions) { newObstacle };
-                if (CausesLoop(temperedObstacles, guardPosition, input))
-                {
-                    counter++;
-                }
+                newObstaclePositions.Add(newObstacle);
             }
-
-            Console.WriteLine($"Ran line {y}");
         }
+
+        Parallel.ForEach(newObstaclePositions, newObstacle =>
+        {
+            var temperedObstacles = new List<Position>(obstaclePositions) { newObstacle };
+            if (CausesLoop(temperedObstacles, guardPosition, input))
+            {
+                counter++;
+            }
+        });
 
         return counter;
     }
