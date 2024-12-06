@@ -49,6 +49,7 @@ public class Day6 : Day
                 {
                     continue;
                 }
+
                 newObstaclePositions.Add(newObstacle);
             }
         }
@@ -91,12 +92,10 @@ public class Day6 : Day
     private static bool CausesLoop(List<Position> obstaclePositions, Position guardPosition, string[] input)
     {
         var guardDirection = Direction.Up;
-        // var allGuardPositions = new List<Position>([guardPosition]);
-        var runLoopDetection = false;
-        var positionsSinceLastLoopDetection = new List<Position>();
-        var positionsSinceLastLoopDetection2 = new List<Position>();
-        var stepCounter = 0;
-        var maxSteps = input.Length * input[0].Length;
+        var guardPositionsWhenMovedUp = new List<Position>([guardPosition]);
+        // var runLoopDetection = false;
+        // var stepCounter = 0;
+        // var maxSteps = input.Length * input[0].Length;
         while (true)
         {
             var newPosition = Move(guardPosition, guardDirection);
@@ -107,7 +106,13 @@ public class Day6 : Day
                 newPosition = Move(guardPosition, guardDirection);
                 if (guardDirection == Direction.Up)
                 {
-                    runLoopDetection = true;
+                    if (guardPositionsWhenMovedUp.Contains(newPosition))
+                    {
+                        return true;
+                    }
+
+                    guardPositionsWhenMovedUp.Add(newPosition);
+                    // runLoopDetection = true;
                 }
             }
 
@@ -119,26 +124,26 @@ public class Day6 : Day
                 break;
             }
 
-            positionsSinceLastLoopDetection.Add(guardPosition);
+            // positionsSinceLastLoopDetection.Add(guardPosition);
 
-            if (runLoopDetection)
-            {
-                // var loopDetected = positionsSinceLastLoopDetection.Count > 0 &&
-                //                    positionsSinceLastLoopDetection.SequenceEqual(positionsSinceLastLoopDetection2);
-                var loopDetected = stepCounter > maxSteps;
+            // if (runLoopDetection)
+            // {
+            //     // var loopDetected = positionsSinceLastLoopDetection.Count > 0 &&
+            //     //                    positionsSinceLastLoopDetection.SequenceEqual(positionsSinceLastLoopDetection2);
+            //     var loopDetected = stepCounter > maxSteps;
+            //
+            //     if (loopDetected)
+            //     {
+            //         return true;
+            //     }
+            //     
+            //     positionsSinceLastLoopDetection2 = [..positionsSinceLastLoopDetection];
+            //     positionsSinceLastLoopDetection.Clear();
+            //     
+            //     runLoopDetection = false;
+            // }
 
-                if (loopDetected)
-                {
-                    return true;
-                }
-                
-                positionsSinceLastLoopDetection2 = [..positionsSinceLastLoopDetection];
-                positionsSinceLastLoopDetection.Clear();
-                
-                runLoopDetection = false;
-            }
-
-            stepCounter++;
+            // stepCounter++;
         }
 
         return false;
