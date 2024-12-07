@@ -16,7 +16,7 @@ public class Day6 : Day
         {
             if (CausesLoop(obstaclePositions, newObstacle, guardPosition, input))
             {
-                counter++;
+                Interlocked.Increment(ref counter);
             }
         });
 
