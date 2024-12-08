@@ -2,12 +2,7 @@ namespace AdventOfCode.Tests;
 
 public class Day7Tests
 {
-    private readonly Day7 _instance;
-
-    public Day7Tests()
-    {
-        _instance = new Day7();
-    }
+    private readonly Day7 _instance = new();
 
     [Fact]
     public void TestPuzzle1()
