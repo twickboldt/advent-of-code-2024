@@ -1,3 +1,5 @@
+using Xunit.Abstractions;
+
 namespace AdventOfCode.Tests;
 
 public class Day8Tests
@@ -10,7 +12,14 @@ public class Day8Tests
         var result = _instance.SolvePuzzle1(Input.Split('\n'));
         result.Should().Be(14);
     }
-    
+
+    [Fact]
+    public void TestPuzzle2()
+    {
+        var result = _instance.SolvePuzzle2(Input.Split('\n'));
+        result.Should().Be(34);
+    }
+
     private const string Input = """
                                  ............
                                  ........0...
