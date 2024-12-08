@@ -4,7 +4,7 @@ namespace AdventOfCode.Puzzles;
 
 public class Day5 : Day
 {
-    public override int SolvePuzzle1(string[] input)
+    public override long SolvePuzzle1(string[] input)
     {
         var (orderingRules, prints) = SplitIntoOrderingRulesAndPrints(input);
 
@@ -24,7 +24,7 @@ public class Day5 : Day
         return result;
     }
 
-    public override int SolvePuzzle2(string[] input)
+    public override long SolvePuzzle2(string[] input)
     {
         var (orderingRules, prints) = SplitIntoOrderingRulesAndPrints(input);
 

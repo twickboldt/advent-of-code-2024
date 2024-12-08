@@ -8,7 +8,7 @@ namespace AdventOfCode.Puzzles;
 [SuppressMessage("ReSharper", "LoopCanBeConvertedToQuery")]
 public class Day3 : Day
 {
-    public override int SolvePuzzle1(string[] lines)
+    public override long SolvePuzzle1(string[] lines)
     {
         var sum = 0;
         foreach (var line in lines)
@@ -25,7 +25,7 @@ public class Day3 : Day
         return sum;
     }
 
-    public override int SolvePuzzle2(string[] lines)
+    public override long SolvePuzzle2(string[] lines)
     {
         var input = string.Join("", lines);
         var cleanedInput = Regex.Replace(input, @"don't\(\).*?do\(\)", "");

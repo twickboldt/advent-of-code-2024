@@ -3,19 +3,12 @@ using AdventOfCode.Common;
 
 namespace AdventOfCode;
 
-public class AdventRunner
+public class AdventRunner(IEnumerable<Day> implementations)
 {
-    private readonly IEnumerable<Day> _implementations;
-
-    public AdventRunner(IEnumerable<Day> implementations)
-    {
-        _implementations = implementations;
-    }
-
     public async Task Run()
     {
-        var implementations = _implementations.OrderByDescending(i => i.GetType().Name);
-        foreach (var implementation in implementations)
+        var implementations1 = implementations.OrderByDescending(i => i.GetType().Name);
+        foreach (var implementation in implementations1)
         {
             var dayNumber = int.Parse(implementation.GetType().Name.Replace("Day", ""));
             await ExecuteSolver(implementation, dayNumber);
@@ -28,23 +21,33 @@ public class AdventRunner
         try
         {
             var sw = new Stopwatch();
+            var input = await GetInput(dayNumber);
             sw.Start();
-            var resultPuzzle1 = lastImplementation.SolvePuzzle1(await GetInput(dayNumber));
+            var result = lastImplementation.SolvePuzzle1(input);
             sw.Stop();
-            Console.WriteLine($"Day {dayNumber} Puzzle 1: {resultPuzzle1} took: {sw.Elapsed} | {sw.ElapsedMilliseconds}ms");
+            WriteResult(dayNumber, 1, result, sw);
 
             var puzzle2HasDifferentInput = File.Exists($"inputs/day{dayNumber}_{2}.txt");
             sw.Reset();
+            input = await GetInput(dayNumber, puzzle2HasDifferentInput ? 2 : 1);
             sw.Start();
-            var resultPuzzle2 =
-                lastImplementation.SolvePuzzle2(await GetInput(dayNumber, puzzle2HasDifferentInput ? 2 : 1));
+            result =
+                lastImplementation.SolvePuzzle2(input);
             sw.Stop();
-            Console.WriteLine($"Day {dayNumber} Puzzle 2: {resultPuzzle2} took: {sw.Elapsed} | {sw.ElapsedMilliseconds}ms");
+            WriteResult(dayNumber, 2, result, sw);
         }
         catch (Exception)
         {
             // ignored
         }
+    }
+
+    private static void WriteResult(int dayNumber, int puzzleNumber, long result, Stopwatch sw)
+    {
+        var timeString = sw.Elapsed.TotalMicroseconds > 1000
+            ? $"{sw.Elapsed.TotalMilliseconds}ms"
+            : $"{sw.Elapsed.TotalMicroseconds}µs";
+        Console.WriteLine($"Day {dayNumber} Puzzle {puzzleNumber}: {result} took: {timeString}");
     }
 
     private static async Task<string[]> GetInput(int day, int puzzle = 1)

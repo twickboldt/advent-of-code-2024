@@ -4,7 +4,7 @@ namespace AdventOfCode.Puzzles;
 
 public class Day4 : Day
 {
-    public override int SolvePuzzle1(string[] input)
+    public override long SolvePuzzle1(string[] input)
     {
         var xPositions = GetLetterPositions(input, 'X').ToArray();
         var mPositions = GetLetterPositions(input, 'M').ToArray();
@@ -29,7 +29,7 @@ public class Day4 : Day
         return numberOfXmases;
     }
 
-    public override int SolvePuzzle2(string[] input)
+    public override long SolvePuzzle2(string[] input)
     {
         var aPositions = GetLetterPositions(input, 'A').ToArray();
         var sPositions = GetLetterPositions(input, 'S').ToArray();

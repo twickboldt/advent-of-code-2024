@@ -6,12 +6,12 @@ namespace AdventOfCode.Puzzles;
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class Day2 : Day
 {
-    public override int SolvePuzzle1(string[] lines)
+    public override long SolvePuzzle1(string[] lines)
     {
         return lines.Count(line => IsReportValid(SplitLine(line)));
     }
 
-    public override int SolvePuzzle2(string[] lines)
+    public override long SolvePuzzle2(string[] lines)
     {
         var count = 0;
         foreach (var line in lines)

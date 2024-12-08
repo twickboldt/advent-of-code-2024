@@ -7,7 +7,7 @@ namespace AdventOfCode.Puzzles;
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class Day1 : Day
 {
-    public override int SolvePuzzle1(string[] input)
+    public override long SolvePuzzle1(string[] input)
     {
         var group1Locations = new List<int>();
         var group2Locations = new List<int>();
@@ -35,7 +35,7 @@ public class Day1 : Day
         return totalDistance;
     }
 
-    public override int SolvePuzzle2(string[] input)
+    public override long SolvePuzzle2(string[] input)
     {
         var group1Locations = new List<int>();
         var group2Locations = new List<int>();

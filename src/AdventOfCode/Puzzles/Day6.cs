@@ -5,7 +5,7 @@ namespace AdventOfCode.Puzzles;
 
 public class Day6 : Day
 {
-    public override int SolvePuzzle2(string[] input)
+    public override long SolvePuzzle2(string[] input)
     {
         var sw = Stopwatch.StartNew();
         var (obstaclePositions, guardPosition, newObstaclePositions) = GetStartingPositions2(input);
@@ -175,7 +175,7 @@ public class Day6 : Day
         Left
     }
 
-    public override int SolvePuzzle1(string[] input)
+    public override long SolvePuzzle1(string[] input)
     {
         var (obstaclePositions, guardPosition) = GetStartingPositions(input);
 
