@@ -7,8 +7,8 @@ public class AdventRunner(IEnumerable<Day> implementations)
 {
     public async Task Run()
     {
-        var implementations1 = implementations.OrderByDescending(i => i.GetType().Name);
-        foreach (var implementation in implementations1)
+        foreach (var implementation in implementations.OrderByDescending(i =>
+                     int.Parse(i.GetType().Name.Replace("Day", ""))))
         {
             var dayNumber = int.Parse(implementation.GetType().Name.Replace("Day", ""));
             await ExecuteSolver(implementation, dayNumber);
