@@ -21,7 +21,7 @@ public class Day10 : Day
         var startingPositions = GetPositionsWithValue(map, 0);
 
         var numberOfPaths = 0;
-        foreach (var startingPosition in startingPositions)
+        Parallel.ForEach(startingPositions, startingPosition =>
         {
             var valueToBeFound = 1;
             var hikerPositions = new[] { startingPosition };
@@ -32,8 +32,9 @@ public class Day10 : Day
                 valueToBeFound++;
             } while (hikerPositions.Length > 0 && valueToBeFound <= 9);
 
-            numberOfPaths += distinct ? hikerPositions.Distinct().Count() : hikerPositions.Length;
-        }
+            var hikerPositionsLength = distinct ? hikerPositions.Distinct().Count() : hikerPositions.Length;
+            Interlocked.Add(ref numberOfPaths, hikerPositionsLength);
+        });
 
         return numberOfPaths;
     }
