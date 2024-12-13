@@ -10,7 +10,6 @@ public class Day11Tests
         var result = _instance.SolvePuzzle1([Input]);
         result.Should().Be(55312);
     }
-    
-    private const string Input = "125 17";
 
+    private const string Input = "125 17";
 }
